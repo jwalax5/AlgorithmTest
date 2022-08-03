@@ -1,10 +1,7 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
-public class DFS {
+public class Graph {
     public static void main(String[] args) {
         List<int[]> adjacentList = new ArrayList<>();
         int[] nodeA = IntStream.of(1, 3).toArray();
@@ -28,20 +25,42 @@ public class DFS {
 
         List<Integer> resultList = new ArrayList<>();
         HashSet<Integer> seen = new HashSet<>();
-        dfs(0,adjacentList,resultList,seen);
-        System.out.println(resultList);
+        dfs(0, adjacentList, resultList, seen);
+        System.out.println("DFS : " + resultList);
+        List<Integer> resultBFSList = new ArrayList<>();
+        bfs(adjacentList, resultBFSList);
+
+        System.out.println("BFS : " + resultBFSList);
     }
 
-    public static void dfs(int currentNodeIndex, List<int[]> adjacentList ,List<Integer> result,HashSet<Integer> seen){
+    public static void dfs(int currentNodeIndex, List<int[]> adjacentList, List<Integer> result, HashSet<Integer> seen) {
         // base case
         int[] neibour = adjacentList.get(currentNodeIndex);
-        if(neibour.length == 0) return;
+        if (neibour.length == 0) return;
         result.add(currentNodeIndex);
         seen.add(currentNodeIndex);
         // child
-        for(int nodeInx : neibour){
-            if(!seen.contains(nodeInx)) {
-                dfs(nodeInx,adjacentList,result,seen);
+        for (int nodeInx : neibour) {
+            if (!seen.contains(nodeInx)) {
+                dfs(nodeInx, adjacentList, result, seen);
+            }
+        }
+    }
+
+    public static void bfs(List<int[]> adjacentList, List<Integer> result) {
+        if (adjacentList.size() == 0) return;
+        HashSet<Integer> seen = new HashSet<>();
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.add(0);
+        while (!queue.isEmpty()) {
+            int currentNodeIndex = queue.poll();
+            result.add(currentNodeIndex);
+            seen.add(currentNodeIndex);
+            int[] neibour = adjacentList.get(currentNodeIndex);
+            for (int nodeInx : neibour) {
+                if (!seen.contains(nodeInx)) {
+                    queue.add(nodeInx);
+                }
             }
         }
     }
