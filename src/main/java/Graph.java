@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class Graph {
-    public static void main(String[] args) {
+    public void test() {
         List<int[]> adjacentList = new ArrayList<>();
         int[] nodeA = IntStream.of(1, 3).toArray();
         int[] nodeB = IntStream.of(0).toArray();
@@ -33,7 +33,7 @@ public class Graph {
         System.out.println("BFS : " + resultBFSList);
     }
 
-    public static void dfs(int currentNodeIndex, List<int[]> adjacentList, List<Integer> result, HashSet<Integer> seen) {
+    public void dfs(int currentNodeIndex, List<int[]> adjacentList, List<Integer> result, HashSet<Integer> seen) {
         // base case
         int[] neibour = adjacentList.get(currentNodeIndex);
         if (neibour.length == 0) return;
@@ -47,7 +47,7 @@ public class Graph {
         }
     }
 
-    public static void bfs(List<int[]> adjacentList, List<Integer> result) {
+    public void bfs(List<int[]> adjacentList, List<Integer> result) {
         if (adjacentList.size() == 0) return;
         HashSet<Integer> seen = new HashSet<>();
         Queue<Integer> queue = new ArrayDeque<>();
