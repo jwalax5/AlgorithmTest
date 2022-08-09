@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class Graph {
-    public void test() {
+    public void run() {
         List<int[]> adjacentList = new ArrayList<>();
         int[] nodeA = IntStream.of(1, 3).toArray();
         int[] nodeB = IntStream.of(0).toArray();
